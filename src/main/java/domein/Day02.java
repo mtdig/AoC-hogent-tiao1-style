@@ -6,11 +6,6 @@ import java.util.Optional;
 
 public class Day02 implements Day {
 
-    private enum Safety {
-        SAFE,
-        UNSAFE
-    }
-
     private enum Direction {
         UP,
         DOWN
