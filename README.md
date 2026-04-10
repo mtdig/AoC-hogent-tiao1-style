@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Streams make java bearable (barely). I find AoC excellent for exploring new programming languages.
+Streams make java bearable (barely). I find AoC excellent for exploring new programming languages, less boring and tedious than the usual leetcode problems.
 
 [about AdventOfCode](https://adventofcode.com/2024/about)
 
@@ -19,4 +19,3 @@ We start with a solved Day1.
 That's it.
 
 Run with `mvn javafx:run`.
-

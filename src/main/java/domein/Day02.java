@@ -17,7 +17,6 @@ public class Day02 implements Day {
     }
 
     static class RuleChecker {
-
         private static Optional<Integer> checkRule(List<Integer> numbers){
             var direction = numbers.get(0) > numbers.get(1) ? Direction.DOWN : Direction.UP;
 
@@ -34,16 +33,13 @@ public class Day02 implements Day {
                         return Optional.of(i);
                     }
                 }
-
             }
-
             return Optional.empty();
         }
     }
 
+
     static class LineParser {
-
-
         private static List<Integer> parseLine(String line) {
             var numbers = Arrays.stream(line.split("\\s+"))
                     .map(Integer::parseInt).toList();
@@ -59,6 +55,7 @@ public class Day02 implements Day {
         var numberlines = input.stream().map(LineParser::parseLine).toList();
         System.out.printf("line: %s%n", numberlines);
 
+        // TODO: put this back together, split stream for troubleshooting
         var tsafes = numberlines.stream()
                         .map(RuleChecker::checkRule)
                 .toList();
