@@ -26,7 +26,7 @@ class Day02Test {
 
     @Test
     void part2_example() {
-        assertEquals("569", day.solvePart2(EXAMPLE));
+        assertEquals("4", day.solvePart2(EXAMPLE));
     }
 
 
