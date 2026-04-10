@@ -1,4 +1,4 @@
-# AdventOfCode 2024 Hogent/TIAO style
+# AdventOfCode 2024 Hogent/TIAO1 style
 
 ## Introduction
 
