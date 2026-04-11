@@ -68,14 +68,10 @@ public class Day02 implements Day {
         var numberlines = input.stream().map(LineParser::parseLine).toList();
         System.out.printf("line: %s%n", numberlines);
 
-        // TODO: put this back together, split stream for troubleshooting
-        var tsafes = numberlines.stream()
+        var safes = numberlines.stream()
                         .map(RuleChecker::checkRule)
-                .toList();
-
-        System.out.printf("tsafes: %s%n", tsafes);
-
-        var safes =  tsafes.stream().filter(Optional::isEmpty)
+                .peek((s) -> System.out.println("s?: " +  s))
+                        .filter(Optional::isEmpty)
                         .count();
 
         System.out.printf("safes: %s%n", safes);
