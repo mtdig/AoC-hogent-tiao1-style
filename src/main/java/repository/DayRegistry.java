@@ -2,11 +2,8 @@ package repository;
 
 import domein.Day;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.LinkedHashMap;
 import java.util.SequencedMap;
-import java.util.regex.Pattern;
 
 public class DayRegistry {
 
