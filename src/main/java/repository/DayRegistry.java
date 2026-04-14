@@ -2,37 +2,28 @@ package repository;
 
 import domein.Day;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.LinkedHashMap;
 import java.util.SequencedMap;
-import java.util.regex.Pattern;
 
 public class DayRegistry {
 
-    private static final Pattern DAY_PATTERN = Pattern.compile("Day(\\d{2})\\.class");
+    private static final int MAX_DAY = 25;
 
     public static SequencedMap<Integer, Day> findAll() {
         var days = new LinkedHashMap<Integer, Day>();
 
-        try (var stream = new BufferedReader(new InputStreamReader(
-                DayRegistry.class.getClassLoader().getResourceAsStream("domein")))) {
-            stream.lines()
-                    .map(DAY_PATTERN::matcher)
-                    .filter(m -> m.matches())
-                    .forEach(m -> {
-                        int number = Integer.parseInt(m.group(1));
-                        try {
-                            var clazz = Class.forName("domein.Day" + m.group(1));
-                            if (Day.class.isAssignableFrom(clazz)) {
-                                days.put(number, (Day) clazz.getDeclaredConstructor().newInstance());
-                            }
-                        } catch (Exception e) {
-                            System.err.println("Could not load Day" + m.group(1) + ": " + e.getMessage());
-                        }
-                    });
-        } catch (Exception e) {
-            throw new RuntimeException("Cannot scan domain package", e);
+        for (int i = 1; i <= MAX_DAY; i++) {
+            String className = String.format("domein.Day%02d", i);
+            try {
+                var clazz = Class.forName(className);
+                if (Day.class.isAssignableFrom(clazz)) {
+                    days.put(i, (Day) clazz.getDeclaredConstructor().newInstance());
+                }
+            } catch (ClassNotFoundException e) {
+                // Day not implemented yet, skip
+            } catch (Exception e) {
+                System.err.println("Could not load " + className + ": " + e.getMessage());
+            }
         }
 
         return days;
