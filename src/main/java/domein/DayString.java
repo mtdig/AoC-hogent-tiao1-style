@@ -1,3 +1,9 @@
+/*
+Ik had een DayString interface nodig omdat sommige dagen hun invoer liever als één grote string willen ontvangen in plaats van een lijst van regels.
+In plaats van dat elke dag zelf de lijst van regels moet samenvoegen tot een string, kunnen ze gewoon deze interface implementeren en de
+ default methoden zorgen voor de conversie van List<String> naar String.
+
+*/
 package domein;
 
 import java.util.List;

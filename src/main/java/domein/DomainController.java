@@ -1,3 +1,8 @@
+/*
+De DomainController is de centrale klasse in de domeinlaag van deze applicatie.
+
+*/
+
 package domein;
 
 import dto.DayResultDto;
