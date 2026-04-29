@@ -22,6 +22,7 @@
  */
 package domein;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
 import java.util.Optional;
@@ -74,20 +75,34 @@ public class Day02 implements Day {
     }
 
     // Deel 1: tel hoeveel rapporten direct veilig zijn (zonder aanpassingen).
+    private Optional<Integer> problem_dampener(List<Integer> items, int faultIndex){
+        // try removing the fault index, the one after it, and the one before it
+        for (int offset = -1; offset <= 1; offset++) {
+            int removeAt = faultIndex + offset;
+            if (removeAt < 0 || removeAt >= items.size()) continue;
+
+            var newItems = new ArrayList<>(items);
+            newItems.remove(removeAt);
+
+            if (RuleChecker.checkRule(newItems).isEmpty()) {
+                return Optional.empty();
+            }
+        }
+        // none of the removals fixed it
+        return Optional.of(faultIndex);
+    }
+
+
     @Override
     public String solvePart1(List<String> input) {
         var numberlines = input.stream().map(LineParser::parseLine).toList();
         System.out.printf("line: %s%n", numberlines);
 
-        // Controleer elk rapport en houd bij of het veilig is (Optional.empty = veilig).
-        var tsafes = numberlines.stream()
+        var safes = numberlines.stream()
                         .map(RuleChecker::checkRule)
-                        .toList();
-
-        System.out.printf("tsafes: %s%n", tsafes);
-
-        // Tel het aantal rapporten waarvoor geen overtreding gevonden werd.
-        var safes = tsafes.stream().filter(Optional::isEmpty).count();
+                .peek((s) -> System.out.println("s?: " +  s))
+                        .filter(Optional::isEmpty)
+                        .count();
 
         System.out.printf("safes: %s%n", safes);
 
@@ -98,6 +113,25 @@ public class Day02 implements Day {
     // De Problem Dampener-logica is nog niet geïmplementeerd voor de algemene case.
     @Override
     public String solvePart2(List<String> input) {
-        return String.valueOf(569);
+        int safes = 0, unsafes = 0;
+
+        for ( var line : input){
+            var lineNumbers = LineParser.parseLine(line);
+            System.out.printf("lineNumbers: %s%n", lineNumbers);
+            var checkSafety = RuleChecker.checkRule(lineNumbers);
+            System.out.printf("checkSafety: %s%n", checkSafety);
+
+            if (checkSafety.isEmpty()){
+                safes++;
+            } else {
+                if (problem_dampener(lineNumbers, checkSafety.get()).isEmpty()){
+                    safes++;
+                } else {
+                    unsafes++;
+                }
+            }
+        }
+        System.out.printf("unsafes: %d%n", unsafes);
+        return String.valueOf(safes);
     }
 }

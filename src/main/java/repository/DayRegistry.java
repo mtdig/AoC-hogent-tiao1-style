@@ -2,17 +2,15 @@ package repository;
 
 import domein.Day;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.LinkedHashMap;
 import java.util.SequencedMap;
-import java.util.regex.Pattern;
 
 public class DayRegistry {
 
     // Regex om bestanden te herkennen die overeenkomen met "Day01.class", "Day02.class", ...
     // De haakjes rond \\d{2} vormen een groep zodat we het dagnummer apart kunnen opvragen.
     private static final Pattern DAY_PATTERN = Pattern.compile("Day(\\d{2})\\.class");
+    private static final int MAX_DAY = 25;
 
     // Zoek alle geïmplementeerde dagen op en geef ze terug als een geordende map:
     // dagnummer (1, 2, ...) → instantie van de bijhorende Day-klasse.
