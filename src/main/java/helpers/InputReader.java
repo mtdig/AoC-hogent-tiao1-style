@@ -1,8 +1,12 @@
-package helpers;
+
+// TODO: move to repository
+/*
+ helpers;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+
 import java.util.stream.Stream;
 
 public class InputReader {
@@ -21,3 +25,4 @@ public class InputReader {
         return readLines(day).stream();
     }
 }
+*/
